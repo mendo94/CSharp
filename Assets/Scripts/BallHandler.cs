@@ -66,12 +66,14 @@ public class BallHandler : MonoBehaviour
 
         Invoke(nameof(DetachBall), detachDelay);
     }
+
     private void DetachBall()
     {
         currentBallSprintJoint.enabled = false;
         currentBallSprintJoint = null;
 
         Invoke(nameof(SpawnNewBall), respawnDelay);
-
     }
 }
+
+
