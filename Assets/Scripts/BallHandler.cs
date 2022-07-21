@@ -23,8 +23,8 @@ public class BallHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentBallRigidbody == null){return;}
-        if(!Touchscreen.current.primaryTouch.press.isPressed)
+        if (currentBallRigidbody == null) { return; }
+        if (!Touchscreen.current.primaryTouch.press.isPressed)
         {
             if(isDragging)
             {
