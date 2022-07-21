@@ -52,11 +52,13 @@ public class BallHandler : MonoBehaviour
     private void SpawnNewBall()
     {
         GameObject ballInstance = Instantiate(ballPrefab, pivot.position, Quaternion.identity);
+
         currentBallRigidbody = ballInstance.GetComponent<Rigidbody2D>();
-        currentBallSpringJoint = ballInstance.GetComponent<SpringJoint2D>();
+        currentBallSprintJoint = ballInstance.GetComponent<SpringJoint2D>();
 
         currentBallSpringJoint.connectedBody = pivot;
     }
+
     private void LaunchBall()
     {
         currentBallRigidbody.isKinematic = false;
@@ -66,9 +68,10 @@ public class BallHandler : MonoBehaviour
     }
     private void DetachBall()
     {
-        currentBallSpringJoint.enabled = false;
-        currentBallSpringJoint = null;
+        currentBallSprintJoint.enabled = false;
+        currentBallSprintJoint = null;
 
         Invoke(nameof(SpawnNewBall), respawnDelay);
+
     }
 }
