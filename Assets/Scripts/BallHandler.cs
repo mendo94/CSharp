@@ -1,6 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 public class BallHandler : MonoBehaviour
 {
@@ -23,36 +26,51 @@ public class BallHandler : MonoBehaviour
         SpawnNewBall();
     }
 
+    void OnEnable()
+    {
+        EnhancedTouchSupport.Enable();
+    }
+
+    void OnDisable()
+    {
+        EnhancedTouchSupport.Disable();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (currentBallRigidbody == null) { return; }
-        if (!Touchscreen.current.primaryTouch.press.isPressed)
+
+        if (Touch.activeTouches.Count == 0)
         {
-            if(isDragging)
+            if (isDragging)
             {
                 LaunchBall();
             }
 
             isDragging = false;
 
-            
             return;
         }
 
         isDragging = true;
-
         currentBallRigidbody.isKinematic = true;
 
-        Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+        Vector2 touchPosition = new Vector2();
+
+        foreach(Touch touch in Touch.activeTouches)
+        {
+            touchPosition += touch.screenPosition;
+        }
+
+        touchPosition /= Touch.activeTouches.Count;
 
         Vector3 worldPosition = mainCamera.ScreenToWorldPoint(touchPosition);
 
         currentBallRigidbody.position = worldPosition;
- 
     }
 
-   private void SpawnNewBall()
+    private void SpawnNewBall()
     {
         GameObject ballInstance = Instantiate(ballPrefab, pivot.position, Quaternion.identity);
 
@@ -61,7 +79,6 @@ public class BallHandler : MonoBehaviour
 
         currentBallSprintJoint.connectedBody = pivot;
     }
-
 
     private void LaunchBall()
     {
@@ -79,5 +96,4 @@ public class BallHandler : MonoBehaviour
         Invoke(nameof(SpawnNewBall), respawnDelay);
     }
 }
-
 
