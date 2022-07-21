@@ -49,15 +49,16 @@ public class BallHandler : MonoBehaviour
  
     }
 
-    private void SpawnNewBall()
+   private void SpawnNewBall()
     {
         GameObject ballInstance = Instantiate(ballPrefab, pivot.position, Quaternion.identity);
 
         currentBallRigidbody = ballInstance.GetComponent<Rigidbody2D>();
         currentBallSprintJoint = ballInstance.GetComponent<SpringJoint2D>();
 
-        currentBallSpringJoint.connectedBody = pivot;
+        currentBallSprintJoint.connectedBody = pivot;
     }
+
 
     private void LaunchBall()
     {
