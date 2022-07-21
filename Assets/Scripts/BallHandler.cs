@@ -8,10 +8,13 @@ public class BallHandler : MonoBehaviour
     [SerializeField] private Rigidbody2D pivot;
     [SerializeField] private float detachDelay;
     [SerializeField] private float respawnDelay;
+
     private Rigidbody2D currentBallRigidbody;
-    private SpringJoint2D currentBallSpringJoint;
+    private SpringJoint2D currentBallSprintJoint;
+
     private Camera mainCamera;
     private bool isDragging;
+
     // Start is called before the first frame update
     void Start()
     {
