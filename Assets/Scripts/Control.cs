@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+// using System.Collections;
+// using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,9 +16,11 @@ public class Control : MonoBehaviour
     {
         
     }
-    public void ResetTheGame() 
+   public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        print("The button is working.");
+        print("Scene restarted");
+        Time.timeScale = 1f;
+    
     }
 }

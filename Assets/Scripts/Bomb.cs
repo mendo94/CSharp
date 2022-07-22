@@ -15,13 +15,11 @@ public class Bomb : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+ 
+      void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            explode();
-        }
-        
+
+        Invoke(nameof(explode), 10f);
     }
     void explode()
     {
@@ -33,5 +31,12 @@ public class Bomb : MonoBehaviour
 
         obj.GetComponent<Rigidbody2D>().AddForce(direction * force);
        }
+    }
+
+    void OnDrawGizmosSelected() 
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, fieldofImpact);
+        
     }
 }
